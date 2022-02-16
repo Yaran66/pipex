@@ -81,13 +81,13 @@ void	ft_pipex(int fdin, int fdout, char **argv)
 	}
 	else
 	{
-		waitpid(pid, NULL, 0);
 		close(fd[1]);
 		dup2 (fd[0], STDIN_FILENO);
 		dup2 (fdout, STDOUT_FILENO);
 		close(fdout);
 		ft_execute(argv[3]);
 	}
+	waitpid(-1, NULL, 0);
 }
 
 int	main(int argc, char **argv)
