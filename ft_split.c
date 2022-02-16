@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "pipex.h"
 
-int	ft_wordcount(const char *s, char c)
+static int	ft_wordcount(const char *s, char c)
 {
 	int	i;
 	int	j;
@@ -32,7 +32,7 @@ int	ft_wordcount(const char *s, char c)
 	return (j);
 }
 
-char	*ft_word_extract(char const *str, char c)
+static char	*ft_word_extract(char const *str, char c)
 {
 	char	*word;
 	int		i;
@@ -55,7 +55,7 @@ char	*ft_word_extract(char const *str, char c)
 	return (word);
 }
 
-void	ft_free_words_ptr(int i, char **ptr)
+static void	ft_free_words_ptr(int i, char **ptr)
 {
 	while (i > 0)
 	{

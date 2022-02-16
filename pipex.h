@@ -13,13 +13,13 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <sys/wait.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 
-extern char **environ;
+extern char	**environ;
 
 size_t	ft_strlen(const char *str);
 char	*ft_strnstr(const char *largestr, const char *smallstr, size_t n);
