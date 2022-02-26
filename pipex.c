@@ -6,7 +6,7 @@
 /*   By: wjasmine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:31:42 by wjasmine          #+#    #+#             */
-/*   Updated: 2022/01/31 13:06:07 by wjasmine         ###   ########.fr       */
+/*   Updated: 2022/02/26 08:37:57 by wjasmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ void	ft_execute(char *cmd)
 	}
 }
 
+void	ft_kid(int *fd, int fdin, char **argv)
+{
+	close(fd[0]);
+	dup2 (fdin, STDIN_FILENO);
+	dup2 (fd[1], STDOUT_FILENO);
+	close(fdin);
+	ft_execute(argv[2]);
+}
+
 void	ft_pipex(int fdin, int fdout, char **argv)
 {
 	int	fd[2];
@@ -72,13 +81,7 @@ void	ft_pipex(int fdin, int fdout, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
-	{
-		close(fd[0]);
-		dup2 (fdin, STDIN_FILENO);
-		dup2 (fd[1], STDOUT_FILENO);
-		close(fdin);
-		ft_execute(argv[2]);
-	}
+		ft_kid(fd, fdin, argv);
 	else
 	{
 		close(fd[1]);
