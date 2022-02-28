@@ -6,7 +6,7 @@
 /*   By: wjasmine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:31:42 by wjasmine          #+#    #+#             */
-/*   Updated: 2022/02/26 08:37:57 by wjasmine         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:39:28 by wjasmine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	ft_execute(char *cmd)
 	pathcmd = ft_get_path_cmd(cmds[0]);
 	if (!pathcmd)
 	{
-		write(STDERR_FILENO, "command not found:", 18);
+		write(STDERR_FILENO, "command not found: ", 19);
 		write(STDERR_FILENO, cmds[0], ft_strlen(cmds[0]));
 		write(STDERR_FILENO, "\n", 1);
 		exit(EXIT_FAILURE);
 	}
 	if (execve (pathcmd, cmds, environ) == -1)
 	{
-		perror("");
+		perror("execution error");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -71,13 +71,13 @@ void	ft_pipex(int fdin, int fdout, char **argv)
 
 	if (pipe(fd) == -1)
 	{
-		perror("");
+		perror("pipe error");
 		exit(EXIT_FAILURE);
 	}
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("");
+		perror("fork error");
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
@@ -107,7 +107,7 @@ int	main(int argc, char **argv)
 	fdout = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (fdin < 0 || fdout < 0)
 	{
-		perror("");
+		perror("file error");
 		exit(EXIT_FAILURE);
 	}
 	ft_pipex (fdin, fdout, argv);
